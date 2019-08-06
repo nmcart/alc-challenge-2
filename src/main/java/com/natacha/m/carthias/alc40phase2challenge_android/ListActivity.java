@@ -43,10 +43,12 @@ public class ListActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.list_activity_menu, menu);
+
         MenuItem insertMenu = menu.findItem(R.id.insert_menu);
 
         //if user is an administrator then the insert menu will be visible
         if(FirebaseUtil.isAdmin == true) {
+            menu.findItem(R.id.insert_menu).setVisible(true);
             insertMenu.setVisible(true);
 
         }
@@ -64,16 +66,16 @@ public class ListActivity extends AppCompatActivity {
                 Intent intent = new Intent(this, DealActivity.class);
                 startActivity(intent);
                 return true;
-                //log out on menu item click
+            //log out on menu item click
             case R.id.logout_menu:
                 AuthUI.getInstance()
                         .signOut(this)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             public void onComplete(@NonNull Task<Void> task) {
-                               Log.d("Logout", "User Logged Out");
+                                Log.d("Logout", "User Logged Out");
 
-                               //if user is not logged, login page will be called
-                               FirebaseUtil.attachListener();
+                                //if user is not logged, login page will be called
+                                FirebaseUtil.attachListener();
                             }
                         });
                 FirebaseUtil.detachListener();
@@ -106,7 +108,6 @@ public class ListActivity extends AppCompatActivity {
 
     //menu options must be redrawn
     public void showMenu(){
-
         invalidateOptionsMenu();
     }
 }

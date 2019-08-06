@@ -160,7 +160,7 @@ public class DealActivity extends AppCompatActivity {
         inflater.inflate(R.menu.save_menu, menu);
 
         //if user is an administrator then the save and delete menu options are visible
-        if(FirebaseUtil.isAdmin) {
+        if(FirebaseUtil.isAdmin == true) {
             menu.findItem(R.id.delete_menu).setVisible(true);
             menu.findItem(R.id.save_menu).setVisible(true);
             //if user is an administrator then edit text are enabled
@@ -173,6 +173,10 @@ public class DealActivity extends AppCompatActivity {
             //if user is not an administrator then the edit text are disabled
             enableEditTexts(false);
             findViewById(R.id.btnImage).setEnabled(false);
+
+            //make button invisible
+            View btn = findViewById(R.id.btnImage);
+            btn.setVisibility(View.GONE);
         }
         return true;
     }
