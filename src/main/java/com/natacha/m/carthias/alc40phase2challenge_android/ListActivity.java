@@ -43,18 +43,20 @@ public class ListActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.list_activity_menu, menu);
+        return true;
+    }
 
-        MenuItem insertMenu = menu.findItem(R.id.insert_menu);
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
 
         //if user is an administrator then the insert menu will be visible
         if(FirebaseUtil.isAdmin == true) {
             menu.findItem(R.id.insert_menu).setVisible(true);
-            insertMenu.setVisible(true);
 
         }
         //if the user is not an administrator then the insert menu will not be visible
         else {
-            insertMenu.setVisible(false);
+            menu.findItem(R.id.insert_menu).setVisible(false);
         }
         return true;
     }
@@ -103,6 +105,7 @@ public class ListActivity extends AppCompatActivity {
         LinearLayoutManager dealsLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         rvDeals.setLayoutManager(dealsLayoutManager);
         FirebaseUtil.attachListener();
+
     }
 
 
